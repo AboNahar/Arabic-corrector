@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصحح ومشكّل النصوص العربية | مُصَحِّح</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <span class="logo-text">مُصَحِّح</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">المميزات</a>
+                <a href="#how-it-works" class="nav-link">كيف يعمل</a>
+                <a href="#about" class="nav-link">عن المشروع</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">صحّح وشكّل</span>
+                    نصوصك العربية بدقة
+                </h1>
+                <p class="hero-subtitle">
+                    منصة ذكية للتصحيح الإملائي وتشكيل أواخر الكلمات بناءً على الإعراب النحوي
+                </p>
+                <a href="#editor" class="cta-button">
+                    ابدأ الآن مجاناً
+                    <span class="arrow">←</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- المميزات -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">لماذا <span class="gradient-text">مُصَحِّح</span>؟</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✍️</div>
+                    <h3>تصحيح إملائي دقيق</h3>
+                    <p>كشف وتصحيح الأخطاء الإملائية الشائعة في اللغة العربية</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>تشكيل أواخر الكلمات</h3>
+                    <p>تشكيل تلقائي لأواخر الكلمات حسب الموقع الإعرابي</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>سريع وفعال</h3>
+                    <p>معالجة فورية للنصوص بدون انتظار</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>تعليمي</h3>
+                    <p>عرض التصحيحات والتغييرات بشكل واضح ومفهوم</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المحرر -->
+    <section id="editor" class="editor-section">
+        <div class="container">
+            <h2 class="section-title">جرّب <span class="gradient-text">الآن</span></h2>
+            
+            <div class="editor-container">
+                <!-- منطقة الإدخال -->
+                <div class="input-area">
+                    <div class="area-header">
+                        <h3>النص الأصلي</h3>
+                        <button class="clear-btn" onclick="clearInput()">
+                            <span>🗑️</span> مسح
+                        </button>
+                    </div>
+                    <textarea 
+                        id="inputText" 
+                        class="text-input"
+                        placeholder="اكتب نصك هنا أو جرّب المثال...&#10;&#10;مثال: الطالب ذهب الى المدرسه ودرس الرياضيات والعلوم"
+                    ></textarea>
+                    <div class="input-footer">
+                        <button class="sample-btn" onclick="loadSample()">
+                            📝 تحميل نص تجريبي
+                        </button>
+                        <span class="char-count" id="charCount">0 حرف</span>
+                    </div>
+                </div>
+
+                <!-- زر المعالجة -->
+                <div class="process-button-container">
+                    <button class="process-btn" id="processBtn" onclick="processText()">
+                        <span class="btn-icon">🔍</span>
+                        <span class="btn-text">تصحيح وتشكيل</span>
+                    </button>
+                </div>
+
+                <!-- منطقة النتائج -->
+                <div class="output-area">
+                    <div class="area-header">
+                        <h3>النتيجة</h3>
+                        <button class="copy-btn" onclick="copyResult()" id="copyBtn" disabled>
+                            <span>📋</span> نسخ
+                        </button>
+                    </div>
+                    <div class="result-tabs">
+                        <button class="tab-btn active" onclick="switchTab('marked')">النص المُشكّل</button>
+                        <button class="tab-btn" onclick="switchTab('corrected')">النص المُصحح</button>
+                        <button class="tab-btn" onclick="switchTab('diff')">التغييرات</button>
+                    </div>
+                    <div class="text-output" id="outputText">
+                        <div class="placeholder">
+                            <div class="placeholder-icon">✨</div>
+                            <p>النتيجة ستظهر هنا</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الإحصائيات -->
+            <div class="stats-container" id="statsContainer" style="display: none;">
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="correctionsCount">0</div>
+                        <div class="stat-label">تصحيحات إملائية</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="wordsMarked">0</div>
+                        <div class="stat-label">كلمات مُشكّلة</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="sentencesCount">0</div>
+                        <div class="stat-label">جمل معالجة</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قائمة التصحيحات -->
+            <div class="corrections-list" id="correctionsList" style="display: none;">
+                <h3 class="corrections-title">📋 التصحيحات المُطبّقة</h3>
+                <div id="correctionsContent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- كيف يعمل -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">كيف <span class="gradient-text">يعمل</span>؟</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>إدخال النص</h3>
+                    <p>اكتب أو الصق النص العربي في المحرر</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>التصحيح الإملائي</h3>
+                    <p>كشف وتصحيح الأخطاء الإملائية الشائعة</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>التحليل النحوي</h3>
+                    <p>تحديد الموقع الإعرابي لكل كلمة</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>التشكيل</h3>
+                    <p>إضافة الحركات الإعرابية لأواخر الكلمات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- عن المشروع -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">عن <span class="gradient-text">المشروع</span></h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        <strong>مُصَحِّح</strong> هو مشروع مفتوح المصدر يهدف إلى مساعدة الكتّاب والطلاب 
+                        في كتابة نصوص عربية صحيحة لغوياً. يستخدم المشروع خوارزميات متقدمة للتصحيح 
+                        الإملائي وقواعد نحوية دقيقة لتشكيل أواخر الكلمات حسب موقعها الإعرابي.
+                    </p>
+                    <div class="tech-stack">
+                        <h4>التقنيات المستخدمة:</h4>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">FastAPI</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">HTML/CSS</span>
+                            <span class="tech-badge">NLP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>مُصَحِّح</h3>
+                    <p>منصة للتصحيح الإملائي وتشكيل النصوص العربية</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <a href="#features">المميزات</a>
+                    <a href="#editor">المحرر</a>
+                    <a href="#about">عن المشروع</a>
+                </div>
+                <div class="footer-section">
+                    <h4>الدعم</h4>
+                    <p>مشروع مفتوح المصدر</p>
+                    <p>نرحب بمساهماتكم وتطويراتكم</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 مُصَحِّح. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- سكريبت JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

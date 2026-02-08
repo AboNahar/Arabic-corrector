@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 دليل النشر التفاعلي - منصة مُصَحِّح</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .step h2 {
+            color: #333;
+            margin: 20px 0;
+            font-size: 2em;
+        }
+
+        .step p {
+            color: #666;
+            line-height: 1.8;
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-right: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .code-box {
+            background: #2d3748;
+            color: #48bb78;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .checklist li {
+            padding: 15px;
+            margin: 10px 0;
+            background: #e6fffa;
+            border-right: 4px solid #38b2ac;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checklist li:hover {
+            background: #b2f5ea;
+            transform: translateX(-5px);
+        }
+
+        .checklist li.checked {
+            background: #c6f6d5;
+            border-right-color: #48bb78;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .checklist li::before {
+            content: '☐';
+            margin-left: 10px;
+            font-size: 1.5em;
+            color: #667eea;
+        }
+
+        .checklist li.checked::before {
+            content: '✓';
+            color: #48bb78;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .link-box {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .link-box a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-bottom: 2px solid white;
+            padding-bottom: 5px;
+        }
+
+        .link-box a:hover {
+            opacity: 0.8;
+        }
+
+        .success-icon {
+            font-size: 5em;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .platform-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .platform-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .platform-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .platform-card.selected {
+            border-color: #667eea;
+            background: #f7fafc;
+        }
+
+        .platform-card h4 {
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .platform-card .badge {
+            display: inline-block;
+            background: #48bb78;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+
+        .warning-box {
+            background: #fff5f5;
+            border-right: 4px solid #fc8181;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #c53030;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: #ebf8ff;
+            border-right: 4px solid #4299e1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #2b6cb0;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 دليل النشر التفاعلي</h1>
+            <p>منصة مُصَحِّح للتصحيح الإملائي والتشكيل</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- الخطوة 0: المقدمة -->
+            <div class="step active" data-step="0">
+                <div class="step-number">👋</div>
+                <h2>مرحباً بك!</h2>
+                
+                <p>هذا الدليل سيساعدك على نشر منصة <strong>مُصَحِّح</strong> على الإنترنت <strong>مجاناً 100%</strong> خلال 30 دقيقة فقط.</p>
+
+                <div class="info-box">
+                    <h4>📋 ما ستحتاجه:</h4>
+                    <ul style="margin-right: 20px; line-height: 2;">
+                        <li>بريد إلكتروني (Gmail أو أي بريد)</li>
+                        <li>ملف المشروع المضغوط (جاهز لديك)</li>
+                        <li>30 دقيقة من وقتك</li>
+                        <li>اتصال بالإنترنت</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>✨ ما ستحصل عليه:</h3>
+                    <p>منصة ويب كاملة متاحة عالمياً على الإنترنت بعنوان خاص مثل:</p>
+                    <div class="code-box">
+                        https://arabic-corrector.onrender.com
+                    </div>
+                    <p>يمكن لأي شخص في العالم استخدامها مجاناً!</p>
+                </div>
+
+                <div class="success-icon">🎯</div>
+            </div>
+
+            <!-- الخطوة 1: إنشاء حساب GitHub -->
+            <div class="step" data-step="1">
+                <div class="step-number">1</div>
+                <h2>إنشاء حساب GitHub</h2>
+                
+                <p><strong>GitHub</strong> هو موقع لحفظ ومشاركة المشاريع البرمجية. سنستخدمه لرفع مشروعك.</p>
+
+                <div class="card">
+                    <h3>🔗 الرابط المطلوب:</h3>
+                    <div class="link-box">
+                        <a href="https://github.com/signup" target="_blank">
+                            اذهب إلى GitHub للتسجيل →
+                        </a>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">✅ قائمة التحقق:</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">افتح رابط التسجيل أعلاه</li>
+                    <li onclick="toggleCheck(this)">أدخل بريدك الإلكتروني</li>
+                    <li onclick="toggleCheck(this)">اختر اسم مستخدم (مثال: ahmed_dev)</li>
+                    <li onclick="toggleCheck(this)">اختر كلمة مرور قوية</li>
+                    <li onclick="toggleCheck(this)">أكمل التحقق البشري (Captcha)</li>
+                    <li onclick="toggleCheck(this)">تحقق من بريدك وأكّد الحساب</li>
+                    <li onclick="toggleCheck(this)">سجّل دخول إلى GitHub</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>💡 نصيحة:</h4>
+                    <p>احفظ بيانات تسجيل الدخول في مكان آمن. ستحتاجها لاحقاً!</p>
+                </div>
+            </div>
+
+            <!-- الخطوة 2: إنشاء مستودع -->
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <h2>إنشاء مستودع (Repository)</h2>
+                
+                <p>المستودع هو مكان تخزين ملفات مشروعك على GitHub.</p>
+
+                <h3>📝 الخطوات:</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">سجّل دخول إلى GitHub</li>
+                    <li onclick="toggleCheck(this)">اضغط على زر <strong>New</strong> (أعلى اليسار)</li>
+                    <li onclick="toggleCheck(this)">في خانة Repository name، اكتب: <code>arabic-corrector</code></li>
+                    <li onclick="toggleCheck(this)">اختر <strong>Public</strong> (عام)</li>
+                    <li onclick="toggleCheck(this)"><strong>لا تختر</strong> "Initialize this repository with"</li>
+                    <li onclick="toggleCheck(this)">اضغط <strong>Create repository</strong></li>
+                </ul>
+
+                <div class="card">
+                    <h3>🎯 النتيجة المتوقعة:</h3>
+                    <p>ستظهر صفحة فارغة مع تعليمات - تجاهلها مؤقتاً وانتقل للخطوة التالية.</p>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ تحذير:</h4>
+                    <p>تأكد من اختيار <strong>Public</strong> وليس Private، لأن الاستضافة المجانية تتطلب مستودعاً عاماً.</p>
+                </div>
+            </div>
+
+            <!-- الخطوة 3: رفع الملفات -->
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <h2>رفع ملفات المشروع</h2>
+                
+                <p>الآن سنرفع ملفات منصة <strong>مُصَحِّح</strong> إلى المستودع.</p>
+
+                <div class="card">
+                    <h3>📦 ملف المشروع:</h3>
+                    <p>أولاً، حمّل ملف المشروع المضغوط من هنا:</p>
+                    <div class="link-box">
+                        <a href="computer:///mnt/user-data/outputs/arabic-corrector-with-deployment.tar.gz">
+                            ⬇️ تحميل المشروع الكامل
+                        </a>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">✅ خطوات الرفع:</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">حمّل ملف المشروع المضغوط (.tar.gz)</li>
+                    <li onclick="toggleCheck(this)">فك ضغط الملف على جهازك (استخرج المجلد)</li>
+                    <li onclick="toggleCheck(this)">في صفحة المستودع على GitHub، اضغط <strong>Add file</strong> ← <strong>Upload files</strong></li>
+                    <li onclick="toggleCheck(this)">اسحب <strong>جميع</strong> الملفات والمجلدات من داخل مجلد <code>arabic-corrector/</code></li>
+                    <li onclick="toggleCheck(this)">في خانة Commit message، اكتب: <code>Initial commit</code></li>
+                    <li onclick="toggleCheck(this)">اضغط <strong>Commit changes</strong></li>
+                    <li onclick="toggleCheck(this)">انتظر حتى يكتمل الرفع (عادة 10-30 ثانية)</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>💡 ملاحظة مهمة:</h4>
+                    <p>تأكد من رفع <strong>محتويات</strong> المجلد وليس المجلد نفسه. يجب أن ترى ملفات مثل: <code>backend/</code>, <code>frontend/</code>, <code>requirements.txt</code>, <code>Procfile</code></p>
+                </div>
+            </div>
+
+            <!-- الخطوة 4: اختيار منصة الاستضافة -->
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <h2>اختيار منصة الاستضافة</h2>
+                
+                <p>سنستخدم <strong>Render.com</strong> لأنها الأفضل والأسهل للمبتدئين.</p>
+
+                <div class="platform-options">
+                    <div class="platform-card selected" onclick="selectPlatform(this)">
+                        <div style="font-size: 3em;">🚀</div>
+                        <h4>Render.com</h4>
+                        <div class="badge">الأفضل</div>
+                        <p style="font-size: 0.9em; margin-top: 10px;">مجاني 100% - بدون بطاقة</p>
+                    </div>
+
+                    <div class="platform-card" onclick="selectPlatform(this)">
+                        <div style="font-size: 3em;">🚂</div>
+                        <h4>Railway.app</h4>
+                        <div class="badge" style="background: #4299e1;">بديل</div>
+                        <p style="font-size: 0.9em; margin-top: 10px;">$5 شهرياً مجاناً</p>
+                    </div>
+
+                    <div class="platform-card" onclick="selectPlatform(this)">
+                        <div style="font-size: 3em;">🐍</div>
+                        <h4>PythonAnywhere</h4>
+                        <div class="badge" style="background: #ed8936;">محدود</div>
+                        <p style="font-size: 0.9em; margin-top: 10px;">مجاني محدود</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>لماذا Render؟</h3>
+                    <ul style="margin-right: 20px; line-height: 2;">
+                        <li>✅ مجاني 100% بدون بطاقة ائتمان</li>
+                        <li>✅ دعم Python/FastAPI مباشرة</li>
+                        <li>✅ HTTPS مجاني (SSL)</li>
+                        <li>✅ نشر تلقائي من GitHub</li>
+                        <li>✅ سهل الاستخدام للمبتدئين</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- الخطوة 5: النشر على Render -->
+            <div class="step" data-step="5">
+                <div class="step-number">5</div>
+                <h2>النشر على Render</h2>
+                
+                <p>الآن سنربط GitHub مع Render وننشر المشروع.</p>
+
+                <div class="card">
+                    <h3>🔗 الرابط المطلوب:</h3>
+                    <div class="link-box">
+                        <a href="https://render.com" target="_blank">
+                            اذهب إلى Render.com →
+                        </a>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">✅ خطوات النشر:</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">افتح Render.com</li>
+                    <li onclick="toggleCheck(this)">اضغط <strong>Get Started for Free</strong></li>
+                    <li onclick="toggleCheck(this)">سجّل دخول باستخدام <strong>GitHub</strong></li>
+                    <li onclick="toggleCheck(this)">وافق على صلاحيات الوصول</li>
+                    <li onclick="toggleCheck(this)">من لوحة التحكم، اضغط <strong>New +</strong> ← <strong>Web Service</strong></li>
+                    <li onclick="toggleCheck(this)">اختر المستودع: <code>arabic-corrector</code></li>
+                    <li onclick="toggleCheck(this)">إذا لم يظهر، اضغط <strong>Configure account</strong></li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>⏭️ التالي:</h4>
+                    <p>بعد اختيار المستودع، ستظهر صفحة الإعدادات - انتقل للخطوة التالية لملئها.</p>
+                </div>
+            </div>
+
+            <!-- الخطوة 6: إعدادات Render -->
+            <div class="step" data-step="6">
+                <div class="step-number">6</div>
+                <h2>إعدادات Web Service</h2>
+                
+                <p>املأ الإعدادات التالية بالضبط:</p>
+
+                <div class="card">
+                    <h3>⚙️ الإعدادات المطلوبة:</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <tr style="background: #f7fafc;">
+                            <td style="padding: 15px; font-weight: bold; border: 1px solid #e2e8f0;">Name</td>
+                            <td style="padding: 15px; border: 1px solid #e2e8f0;">
+                                <code>arabic-corrector</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; font-weight: bold; border: 1px solid #e2e8f0;">Region</td>
+                            <td style="padding: 15px; border: 1px solid #e2e8f0;">
+                                <code>Frankfurt (Europe)</code>
+                            </td>
+                        </tr>
+                        <tr style="background: #f7fafc;">
+                            <td style="padding: 15px; font-weight: bold; border: 1px solid #e2e8f0;">Branch</td>
+                            <td style="padding: 15px; border: 1px solid #e2e8f0;">
+                                <code>main</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; font-weight: bold; border: 1px solid #e2e8f0;">Runtime</td>
+                            <td style="padding: 15px; border: 1px solid #e2e8f0;">
+                                <code>Python 3</code>
+                            </td>
+                        </tr>
+                        <tr style="background: #f7fafc;">
+                            <td style="padding: 15px; font-weight: bold; border: 1px solid #e2e8f0;">Build Command</td>
+                            <td style="padding: 15px; border: 1px solid #e2e8f0; direction: ltr; text-align: left;">
+                                <code>pip install -r requirements.txt</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; font-weight: bold; border: 1px solid #e2e8f0;">Start Command</td>
+                            <td style="padding: 15px; border: 1px solid #e2e8f0; direction: ltr; text-align: left;">
+                                <code>cd backend && uvicorn app:app --host 0.0.0.0 --port $PORT</code>
+                            </td>
+                        </tr>
+                        <tr style="background: #f7fafc;">
+                            <td style="padding: 15px; font-weight: bold; border: 1px solid #e2e8f0;">Instance Type</td>
+                            <td style="padding: 15px; border: 1px solid #e2e8f0;">
+                                <code>Free</code>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3 style="margin-top: 30px;">✅ التحقق:</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">تأكدت من كتابة جميع الإعدادات بالضبط</li>
+                    <li onclick="toggleCheck(this)">اخترت Instance Type: <strong>Free</strong></li>
+                    <li onclick="toggleCheck(this)">نسخت Build Command بالكامل</li>
+                    <li onclick="toggleCheck(this)">نسخت Start Command بالكامل</li>
+                    <li onclick="toggleCheck(this)">ضغطت <strong>Create Web Service</strong></li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4>⚠️ تحذير مهم:</h4>
+                    <p>تأكد من نسخ الأوامر بالضبط دون أخطاء إملائية. أي خطأ سيؤدي لفشل النشر!</p>
+                </div>
+            </div>
+
+            <!-- الخطوة 7: الانتظار والتحقق -->
+            <div class="step" data-step="7">
+                <div class="step-number">7</div>
+                <h2>انتظار اكتمال النشر</h2>
+                
+                <p>بعد الضغط على Create Web Service، ستبدأ عملية النشر تلقائياً.</p>
+
+                <div class="card">
+                    <h3>⏳ ماذا يحدث الآن؟</h3>
+                    <ol style="margin-right: 20px; line-height: 2;">
+                        <li><strong>Building...</strong> - تنزيل المشروع وتثبيت المكتبات (3-5 دقائق)</li>
+                        <li><strong>Deploying...</strong> - تشغيل الخادم (1-2 دقيقة)</li>
+                        <li><strong>Live ✅</strong> - المشروع أصبح متاحاً!</li>
+                    </ol>
+                </div>
+
+                <h3 style="margin-top: 30px;">✅ علامات النجاح:</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">ظهرت رسالة <strong>Build successful</strong></li>
+                    <li onclick="toggleCheck(this)">تغيّر Status إلى <strong>Live</strong> باللون الأخضر</li>
+                    <li onclick="toggleCheck(this)">ظهر رابط المشروع في الأعلى (مثال: <code>https://arabic-corrector.onrender.com</code>)</li>
+                    <li onclick="toggleCheck(this)">عند فتح الرابط، ظهرت واجهة مُصَحِّح</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>💡 نصيحة:</h4>
+                    <p>إذا استغرق الأمر أكثر من 10 دقائق، تحقق من الـ <strong>Logs</strong> للبحث عن أخطاء.</p>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ إذا فشل النشر:</h4>
+                    <p>1. اضغط على <strong>Logs</strong> واقرأ رسالة الخطأ<br>
+                    2. تحقق من أن جميع الملفات موجودة في GitHub<br>
+                    3. تأكد من صحة Build Command و Start Command<br>
+                    4. جرّب النشر مرة أخرى من <strong>Manual Deploy</strong></p>
+                </div>
+            </div>
+
+            <!-- الخطوة 8: الاختبار -->
+            <div class="step" data-step="8">
+                <div class="step-number">8</div>
+                <h2>اختبار المنصة</h2>
+                
+                <p>الآن لنتأكد أن كل شيء يعمل بشكل صحيح!</p>
+
+                <div class="card">
+                    <h3>🔗 رابط منصتك:</h3>
+                    <p>انسخ الرابط الذي ظهر في Render (مثال):</p>
+                    <div class="code-box">
+                        https://arabic-corrector.onrender.com
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">✅ اختبارات يجب إجراؤها:</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">افتح الرابط في المتصفح - ظهرت الواجهة</li>
+                    <li onclick="toggleCheck(this)">جرّب كتابة: "الطالب ذهب الى المدرسه"</li>
+                    <li onclick="toggleCheck(this)">اضغط "صحّح النص"</li>
+                    <li onclick="toggleCheck(this)">ظهرت النتيجة: "الطالبُ ذهبَ إلى المدرسةِ"</li>
+                    <li onclick="toggleCheck(this)">ظهرت الإحصاءات (عدد الأخطاء، الكلمات، إلخ)</li>
+                    <li onclick="toggleCheck(this)">جرّب أمثلة أخرى - تعمل جميعها</li>
+                </ul>
+
+                <div class="card">
+                    <h3>🧪 اختبار API (اختياري):</h3>
+                    <p>للمبرمجين: اختبر الـ API مباشرة</p>
+                    <div class="code-box">
+curl -X POST https://your-app.onrender.com/api/process \
+  -H "Content-Type: application/json" \
+  -d '{"text": "الطالب ذهب الى المدرسه"}'
+                    </div>
+                </div>
+
+                <div class="success-icon">✅</div>
+                <p style="text-align: center; font-size: 1.3em; color: #48bb78; font-weight: bold;">
+                    ممتاز! منصتك تعمل بنجاح
+                </p>
+            </div>
+
+            <!-- الخطوة 9: منع النوم -->
+            <div class="step" data-step="9">
+                <div class="step-number">9</div>
+                <h2>منع نوم التطبيق (اختياري)</h2>
+                
+                <p>في الخطة المجانية، التطبيق ينام بعد 15 دقيقة من عدم الاستخدام. لكن يمكننا منع ذلك!</p>
+
+                <div class="warning-box">
+                    <h4>⚠️ ماذا يعني النوم؟</h4>
+                    <p>عندما ينام التطبيق:<br>
+                    - أول زائر ينتظر 30-60 ثانية لتشغيله<br>
+                    - باقي الزوار يدخلون فوراً<br>
+                    - يعود للنوم بعد 15 دقيقة بدون زوار</p>
+                </div>
+
+                <div class="card">
+                    <h3>🤖 الحل: UptimeRobot (مجاني)</h3>
+                    <p>روبوت يزور موقعك كل 5 دقائق ليبقيه مستيقظاً!</p>
+                    
+                    <div class="link-box">
+                        <a href="https://uptimerobot.com/signUp" target="_blank">
+                            التسجيل في UptimeRobot →
+                        </a>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">✅ خطوات الإعداد:</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">سجّل حساب في UptimeRobot (مجاني)</li>
+                    <li onclick="toggleCheck(this)">اضغط <strong>Add New Monitor</strong></li>
+                    <li onclick="toggleCheck(this)">Monitor Type: <strong>HTTP(s)</strong></li>
+                    <li onclick="toggleCheck(this)">Friendly Name: <code>Arabic Corrector</code></li>
+                    <li onclick="toggleCheck(this)">URL: <code>https://your-app.onrender.com/api/health</code></li>
+                    <li onclick="toggleCheck(this)">Monitoring Interval: <strong>5 minutes</strong></li>
+                    <li onclick="toggleCheck(this)">اضغط <strong>Create Monitor</strong></li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>✨ النتيجة:</h4>
+                    <p>الآن تطبيقك لن ينام أبداً! سيبقى سريعاً دائماً 🚀</p>
+                </div>
+            </div>
+
+            <!-- الخطوة الأخيرة: النجاح -->
+            <div class="step" data-step="10">
+                <div class="step-number">🎉</div>
+                <h2>مبروك! 🎊</h2>
+                
+                <div class="success-icon">🚀✨🎯</div>
+
+                <p style="text-align: center; font-size: 1.3em; line-height: 2;">
+                    <strong>لقد نجحت في نشر منصة مُصَحِّح على الإنترنت!</strong><br>
+                    منصتك الآن متاحة للعالم كله 🌍
+                </p>
+
+                <div class="card">
+                    <h3>📊 ما أنجزته:</h3>
+                    <ul style="margin-right: 20px; line-height: 2;">
+                        <li>✅ أنشأت حساب GitHub</li>
+                        <li>✅ رفعت مشروعاً كاملاً</li>
+                        <li>✅ ربطت GitHub مع Render</li>
+                        <li>✅ نشرت تطبيق ويب حقيقي</li>
+                        <li>✅ حصلت على رابط عالمي</li>
+                        <li>✅ اختبرت جميع الميزات</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>🔗 شارك منصتك:</h4>
+                    <p>يمكنك الآن مشاركة رابط المنصة مع:<br>
+                    - الأصدقاء والعائلة<br>
+                    - على وسائل التواصل الاجتماعي<br>
+                    - في السيرة الذاتية (CV) كمشروع<br>
+                    - كخدمة مجانية للمجتمع العربي</p>
+                </div>
+
+                <div class="card">
+                    <h3>🚀 الخطوات التالية (اختياري):</h3>
+                    <ul style="margin-right: 20px; line-height: 2;">
+                        <li>📱 أضف ميزات جديدة للمنصة</li>
+                        <li>🎨 غيّر التصميم والألوان</li>
+                        <li>🔗 اربط نطاق مخصص (domain)</li>
+                        <li>📊 أضف إحصائيات متقدمة</li>
+                        <li>🤖 دمج نماذج AI أقوى</li>
+                        <li>📱 اصنع تطبيق موبايل</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
+                    <h3 style="color: white;">💖 شكراً لاستخدامك مُصَحِّح!</h3>
+                    <p style="color: white; opacity: 0.9;">
+                        نتمنى أن تكون هذه التجربة ملهمة لك.<br>
+                        الآن أنت مطور ويب حقيقي! 🎯
+                    </p>
+                </div>
+
+                <div class="success-icon">🎓👨‍💻🌟</div>
+            </div>
+
+            <!-- أزرار التنقل -->
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="prevStep()" id="prevBtn" disabled>
+                    ← السابق
+                </button>
+                <button class="btn btn-primary" onclick="nextStep()" id="nextBtn">
+                    التالي →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 11; // 0 إلى 10
+
+        function updateProgress() {
+            const progress = (currentStep / (totalSteps - 1)) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showStep(stepNumber) {
+            // إخفاء جميع الخطوات
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // إظهار الخطوة الحالية
+            const currentStepElement = document.querySelector(`.step[data-step="${stepNumber}"]`);
+            if (currentStepElement) {
+                currentStepElement.classList.add('active');
+            }
+
+            // تحديث الأزرار
+            document.getElementById('prevBtn').disabled = (stepNumber === 0);
+            
+            const nextBtn = document.getElementById('nextBtn');
+            if (stepNumber === totalSteps - 1) {
+                nextBtn.textContent = '🎉 إنهاء';
+            } else {
+                nextBtn.textContent = 'التالي ←';
+            }
+
+            // التمرير للأعلى
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps - 1) {
+                currentStep++;
+                showStep(currentStep);
+            } else {
+                // الخطوة الأخيرة - إعادة للبداية
+                currentStep = 0;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+        }
+
+        function selectPlatform(element) {
+            // إلغاء تحديد جميع البطاقات
+            document.querySelectorAll('.platform-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // تحديد البطاقة المختارة
+            element.classList.add('selected');
+        }
+
+        // عرض الخطوة الأولى عند التحميل
+        showStep(0);
+
+        // اختصارات لوحة المفاتيح
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                prevStep(); // Right arrow = Previous (RTL)
+            } else if (e.key === 'ArrowLeft') {
+                nextStep(); // Left arrow = Next (RTL)
+            }
+        });
+    </script>
+</body>
+</html>
